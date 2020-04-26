@@ -1,23 +1,15 @@
-/*
-  * @file-description : User model, provides the user schema and the interface that defines the user properties
-  * @author{Yassine JOUT} yassinejout@gmail.com
-*/
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
-// Import the required modules
-export interface User{
-    _id: string;
-    username: string;
-    email: string;
-    password: string;
-    cconfirmationCode: number;
-}
+@ObjectType()
+export class User {
+  @Field(type => Int)
+  id: number;
 
-export class UserDTO{
-    constructor(
-    public username: string, 
-    public email: string,
-    public password: string,
-    public id?: string,
-    public confirmationCode?: number)
-    {}
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  lastName?: string;
+
+  
 }
