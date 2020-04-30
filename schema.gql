@@ -2,6 +2,24 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AdminType {
+  id: ID
+  username: String!
+  password: String!
+  rememeberMe: String!
+}
+
 type Query {
-  hello: String!
+  helloAmdin: String!
+  getAll: [AdminType!]!
+}
+
+type Mutation {
+  createAdmin(input: AdminInput!): AdminType!
+}
+
+input AdminInput {
+  username: String!
+  password: String!
+  rememeberMe: String!
 }

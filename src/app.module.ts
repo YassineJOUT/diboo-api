@@ -2,23 +2,18 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
-import { UsersModule } from './users/users.module';
 import { mongooseModule } from './config/db';
-import { AdminResolver } from './admin/admin.resolver';
-import { AdminService } from './admin/admin.service';
 import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
-    mongooseModule,
-    UsersModule,
+    AdminModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql'
     }),
-    UsersModule,
-    AdminModule,
+    mongooseModule
   ],
   controllers: [AppController],
-  providers: [AppService, AdminResolver, AdminService],
+  providers: [AppService],
 })
 export class AppModule {}

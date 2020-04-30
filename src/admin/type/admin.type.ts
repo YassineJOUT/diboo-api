@@ -2,8 +2,8 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 @ObjectType()
 export class AdminType {
-  @Field(() => ID)
-  readonly id: string;
+  @Field(() => ID,{ nullable: true })
+  readonly id?: string;
   @Field()
   readonly username: string;
   @Field()
