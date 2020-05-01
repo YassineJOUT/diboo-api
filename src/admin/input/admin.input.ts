@@ -7,11 +7,13 @@ export class AdminInput {
   @Field()
   readonly username: string;
   @Field()
-  readonly password: string;
+  readonly email: string;
   @Field()
+  readonly password: string;
+  //@Field()
   //image: String;
   //image: Photo;
-  @Field()
-  readonly rememeberMe: string;
+  //@Field()
+  //readonly rememeberMe: string;
   //role: Role;
 }

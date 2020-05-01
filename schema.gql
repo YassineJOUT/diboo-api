@@ -5,8 +5,8 @@
 type AdminType {
   id: ID
   username: String
+  email: String
   password: String
-  rememeberMe: String
 }
 
 type Query {
@@ -22,6 +22,6 @@ type Mutation {
 input AdminInput {
   id: ID
   username: String!
+  email: String!
   password: String!
-  rememeberMe: String!
 }

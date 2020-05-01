@@ -8,9 +8,9 @@ type Photo {
 }
 type Admin {
     id: ID!,
+    email: string!,
     username: String!,
     password: String!,
-    image: String!,
     image: Photo!,
     rememeberMe: String!,
     role: Role!
