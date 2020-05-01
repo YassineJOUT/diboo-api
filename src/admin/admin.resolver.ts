@@ -7,13 +7,7 @@ import { AdminInput } from './input/admin.input';
 export class AdminResolver {
 
     constructor(private readonly adminService: AdminService) {}
-    
-    @Query(() => String)
-    async helloAmdin(){
-        return "Hello Admin";
-    }
-
-
+  
     @Query(() => [AdminType])
     async getAll(){
         return this.adminService.findAll();
@@ -22,5 +16,15 @@ export class AdminResolver {
     @Mutation(() => AdminType)
     async createAdmin(@Args('input') input: AdminInput){
         return this.adminService.create(input);
+    }
+
+    @Mutation(() => AdminType)
+    async updateAdmin(@Args('input') input: AdminInput){
+        return this.adminService.update(input);
+    }
+
+    @Mutation(() => String)
+    async deleteAdmin(@Args('id') id: String){
+        return this.adminService.remove(id);
     }
 }

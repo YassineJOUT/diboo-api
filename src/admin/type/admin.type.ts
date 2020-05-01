@@ -4,14 +4,14 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 export class AdminType {
   @Field(() => ID,{ nullable: true })
   readonly id?: string;
-  @Field()
-  readonly username: string;
-  @Field()
-  readonly password: string;
-  @Field()
+  @Field({ nullable: true })
+  readonly username?: string;
+  @Field({ nullable: true })
+  readonly password?: string;
+  
   //image: String;
   //image: Photo;
-  @Field()
-  readonly rememeberMe: string;
+  @Field({ nullable: true })
+  readonly rememeberMe?: string;
   //role: Role;
 }

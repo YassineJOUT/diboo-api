@@ -4,21 +4,23 @@
 
 type AdminType {
   id: ID
-  username: String!
-  password: String!
-  rememeberMe: String!
+  username: String
+  password: String
+  rememeberMe: String
 }
 
 type Query {
-  helloAmdin: String!
   getAll: [AdminType!]!
 }
 
 type Mutation {
   createAdmin(input: AdminInput!): AdminType!
+  updateAdmin(input: AdminInput!): AdminType!
+  deleteAdmin(id: String!): String!
 }
 
 input AdminInput {
+  id: ID
   username: String!
   password: String!
   rememeberMe: String!
