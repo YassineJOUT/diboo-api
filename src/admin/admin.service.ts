@@ -52,4 +52,8 @@ export class AdminService {
     // 
     return this.adminModel.findOne({email});
   }
+  async findOneById(id: string) {
+   
+    return this.adminModel.findOne({_id: id});
+  }
 }

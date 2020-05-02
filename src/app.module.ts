@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { mongooseModule } from './config/db';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
+import { CarouselModule } from './carousel/carousel.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { AuthModule } from './auth/auth.module';
       autoSchemaFile: 'schema.gql'
     }),
     mongooseModule,
-    AuthModule
+    AuthModule,
+    CarouselModule
   ],
   controllers: [AppController],
   providers: [AppService],

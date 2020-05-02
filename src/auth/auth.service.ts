@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { AdminService } from 'src/admin/admin.service';
+import { AdminType } from 'src/admin/type/admin.type';
 
 @Injectable()
 export class AuthService {
-  constructor(private adminService: AdminService) {}
+  constructor(private readonly admin: AdminService) {}
 
-  async validateUser(email: string, pass: string): Promise<any> {
-    const admin = await this.adminService.findOne(email);
-    if (admin && admin.password === pass) {
-      const { password, ...result } = admin;
-      return result;
+  async validate({ id }): Promise<AdminType> {
+    const user = await this.admin.findOneById(id);
+    if (!user) {
+      throw Error('Authenticate validation error');
     }
-    return null;
+    return user;
   }
 }

@@ -14,10 +14,16 @@ type Query {
 }
 
 type Mutation {
-  login(login: AdminInput!): AdminType!
+  login(loginInput: LoginInput!): AdminType!
   createAdmin(input: AdminInput!): AdminType!
   updateAdmin(input: AdminInput!): AdminType!
   deleteAdmin(id: String!): String!
+  signup(signUpInput: AdminInput!): AdminType!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 input AdminInput {
