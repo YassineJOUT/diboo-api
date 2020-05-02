@@ -5,8 +5,6 @@ export class AdminInput {
   @Field(() => ID, { nullable: true })
   readonly id?: string;
   @Field()
-  readonly username: string;
-  @Field()
   readonly email: string;
   @Field()
   readonly password: string;

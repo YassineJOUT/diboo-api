@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { mongooseModule } from './config/db';
 import { AdminModule } from './admin/admin.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { AdminModule } from './admin/admin.module';
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql'
     }),
-    mongooseModule
+    mongooseModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

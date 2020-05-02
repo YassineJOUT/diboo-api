@@ -16,7 +16,8 @@ export class AdminService {
   }
 
   async update(admin: AdminInput): Promise<Admin> {
-     await this.adminModel
+    
+    await this.adminModel
       .updateOne(
         {
           _id: admin.id,
@@ -26,18 +27,29 @@ export class AdminService {
         },
       )
       .exec();
-      return this.adminModel.findById(admin.id).exec();
+    return this.adminModel.findById(admin.id).exec();
   }
 
   async findAll(): Promise<Admin[]> {
     return this.adminModel.find().exec();
   }
 
-  async remove(id: String){
-    const record = await this.adminModel.deleteOne({
-        _id: id
-    }).exec();
-    
+  async remove(id: String) {
+    const record = await this.adminModel
+      .deleteOne({
+        _id: id,
+      })
+      .exec();
+
     return record.n === 1 ? 'Success' : 'Error';
+  }
+
+  async findOne(email: string) {
+    // const t =  this.adminModel.findOne({$or: [
+    //     {email: username},
+    //     {username: username}
+    // ]}).exec();
+    // 
+    return this.adminModel.findOne({email});
   }
 }
