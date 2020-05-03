@@ -2,32 +2,61 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AdminInput {
+  id: ID
+  email: String!
+  password: String!
+}
+
 type AdminType {
   id: ID
   email: String
   password: String
 }
 
-type Query {
-  getOne(email: String!): AdminType!
-  getAll: [AdminType!]!
+input CarouselInput {
+  id: ID
+  title: String!
+  subtitle: String!
+  status: Boolean!
+  bannerLink: String!
 }
 
-type Mutation {
-  login(loginInput: LoginInput!): AdminType!
-  createAdmin(input: AdminInput!): AdminType!
-  updateAdmin(input: AdminInput!): AdminType!
-  deleteAdmin(id: String!): String!
-  signup(signUpInput: AdminInput!): AdminType!
+type CarouselType {
+  id: ID
+  title: String
+  subtitle: String
+  status: Boolean
+  bannerLink: String
+  createdAt: DateTime
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 input LoginInput {
   email: String!
   password: String!
 }
 
-input AdminInput {
-  id: ID
-  email: String!
-  password: String!
+type Mutation {
+  createAdmin(input: AdminInput!): AdminType!
+  updateAdmin(input: AdminInput!): AdminType!
+  deleteAdmin(id: String!): String!
+  login(loginInput: LoginInput!): AdminType!
+  signup(signUpInput: AdminInput!): AdminType!
+  createCarousel(input: CarouselInput!): CarouselType!
+  addCarouselPhoto(id: String!, file: Upload!): Boolean!
+  deleteCarousel(id: String!): Boolean!
 }
+
+type Query {
+  getOne(email: String!): AdminType!
+  getAll: [AdminType!]!
+  getOneCarousel(id: String!): CarouselType!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
