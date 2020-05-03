@@ -7,14 +7,8 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Resolver()
 export class AdminResolver {
-    
+
     constructor(private readonly adminService: AdminService) {}
-  
-    @UseGuards(AuthGuard('local'))
-    @Mutation(() => AdminType)
-    async login(@Args('login') adminInput: AdminInput){
-        return adminInput;
-    }
 
     @Query(() => AdminType)
     async getOne(@Args('email') email: string){
