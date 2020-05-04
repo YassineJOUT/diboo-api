@@ -13,17 +13,19 @@ export class CarouselResolver {
   constructor(private readonly carouselService: CarouselService) {}
 
   @Query(() => CarouselType)
+  @UseGuards(GqlAuthGuard)
   async getOneCarousel(@Args('id') id: string) {
     return this.carouselService.findOneById(id);
   }
 
   @Mutation(() => CarouselType)
+  @UseGuards(GqlAuthGuard)
   async createCarousel(@Args('input') input: CarouselInput) {
-    console.log(input);
     return this.carouselService.create(input);
   }
 
   @Mutation(() => Boolean)
+  @UseGuards(GqlAuthGuard)
   async addCarouselPhoto(
     @Args({ name: 'file', type: () => GraphQLUpload })
     { createReadStream, filename }: Upload,
