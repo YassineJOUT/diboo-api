@@ -50,6 +50,8 @@ type Mutation {
   createCarousel(input: CarouselInput!): CarouselType!
   addCarouselPhoto(id: String!, file: Upload!): Boolean!
   deleteCarousel(id: String!): Boolean!
+  createSiteSettings(input: SiteInput!): SiteType!
+  updateSiteSettings(input: SiteInput!): SiteType!
 }
 
 type Query {
@@ -57,6 +59,59 @@ type Query {
   getAll: [AdminType!]!
   whoAmI: AdminType!
   getOneCarousel(id: String!): CarouselType!
+  getAllSettings: [SiteType!]!
+}
+
+input SiteInput {
+  id: ID
+  adminName: String!
+  adminEmail: String!
+  supportEmail: String!
+  sitePhone: String!
+  siteName: String!
+  siteLogo: String!
+  siteFavIcon: String!
+  adminPage: String!
+  userPage: String!
+  offlineStatus: Boolean!
+  offlineNote: String!
+  currencySymbol: String!
+  headerText: String!
+  googleAnalyticCode: String!
+  siteMetaTagTitle: String!
+  siteMetaTagKeyword: String!
+  siteMetaTagDescription: String!
+  facebook: String!
+  twitter: String!
+  linkedin: String!
+  youtube: String!
+  instagram: String!
+}
+
+type SiteType {
+  id: ID
+  adminName: String
+  adminEmail: String
+  supportEmail: String
+  sitePhone: String
+  siteName: String
+  siteLogo: String
+  siteFavIcon: String
+  adminPage: String
+  userPage: String
+  offlineStatus: Boolean
+  offlineNote: String
+  currencySymbol: String
+  headerText: String
+  googleAnalyticCode: String
+  siteMetaTagTitle: String
+  siteMetaTagKeyword: String
+  siteMetaTagDescription: String
+  facebook: String
+  twitter: String
+  linkedin: String
+  youtube: String
+  instagram: String
 }
 
 """The `Upload` scalar type represents a file upload."""
