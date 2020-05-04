@@ -27,6 +27,11 @@ type Carousel {
     CreatedBy: Admin!
 }
 
+type Commission {
+    id: ID!.
+    commission: Int!,
+}
+
 type Category {
     id: ID!,
     name: String!,
