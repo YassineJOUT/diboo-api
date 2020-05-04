@@ -11,6 +11,7 @@ import { CarouselModule } from './carousel/carousel.module';
   imports: [
     AdminModule,
     GraphQLModule.forRoot({
+      context: ({ req }) => ({ req }),
       autoSchemaFile: 'schema.gql',
       uploads: {
         maxFileSize: 10000000, // 10 MB

@@ -45,7 +45,7 @@ type Mutation {
   createAdmin(input: AdminInput!): AdminType!
   updateAdmin(input: AdminInput!): AdminType!
   deleteAdmin(id: String!): String!
-  login(loginInput: LoginInput!): AdminType!
+  login(input: LoginInput!): AdminType!
   signup(signUpInput: AdminInput!): AdminType!
   createCarousel(input: CarouselInput!): CarouselType!
   addCarouselPhoto(id: String!, file: Upload!): Boolean!
@@ -55,6 +55,7 @@ type Mutation {
 type Query {
   getOne(email: String!): AdminType!
   getAll: [AdminType!]!
+  whoAmI: AdminType!
   getOneCarousel(id: String!): CarouselType!
 }
 

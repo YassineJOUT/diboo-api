@@ -17,3 +17,11 @@ export const GqlUser = createParamDecorator(
         return ctx.getContext().req.admin;
       },
 );
+
+
+export const CurrentUser = createParamDecorator(
+  (data: unknown, context: ExecutionContext) => {
+    const ctx = GqlExecutionContext.create(context);
+    return ctx.getContext().req.user;
+  },
+);

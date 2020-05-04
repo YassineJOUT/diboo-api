@@ -6,6 +6,7 @@ import { AdminSchema } from 'src/admin/schema/admin.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { AdminService } from 'src/admin/admin.service';
 import { JwtStrategy } from './jwt.strategy';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { JwtStrategy } from './jwt.strategy';
         schema: AdminSchema,
       },
     ]),
-    //PassportModule.register({ defaultStrategy: 'jwt' }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: 'dibooSecret',
       signOptions: {

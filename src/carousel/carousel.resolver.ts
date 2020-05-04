@@ -5,6 +5,8 @@ import { CarouselInput } from './input/carousel.input';
 import { GraphQLUpload } from 'graphql-upload';
 import { createWriteStream } from 'fs';
 import { Upload } from '../shared/upload';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
 
 @Resolver()
 export class CarouselResolver {
@@ -39,6 +41,7 @@ export class CarouselResolver {
   }
 
   @Mutation(() => Boolean)
+  @UseGuards(GqlAuthGuard)
   async deleteCarousel(@Args('id') id: String) {
     return this.carouselService.remove(id);
   }
