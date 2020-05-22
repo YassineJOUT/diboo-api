@@ -10,6 +10,7 @@ import { AdminType } from 'src/admin/type/admin.type';
 import { AdminInput } from 'src/admin/input/admin.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from './graphql-auth.guard';
+import { ResponseType } from 'src/shared/response/ResponseType';
 
 
 @Resolver('Auth')
@@ -19,7 +20,7 @@ export class AuthResolver {
     private readonly admin: AdminService,
   ) {}
 
-  @Mutation(() => AdminType)
+  @Mutation(() => ResponseType)
   async login(
     @Args('input') input: LoginInput,
     @GqlRes() res: Response,
@@ -28,17 +29,26 @@ export class AuthResolver {
     
     const user = await this.admin.findOne(input.email);
     if (!user) {
-      throw Error('Email or password incorrect');
+      return {
+        ok: false,
+        error: 'Email or password incorrect'
+      }
     }
     
     const valid = await bcryptjs.compare(input.password, user.password);
     if (!valid) {
-      throw Error('Email or password incorrect');
+      return {
+        ok: false,
+        error: 'Email or password incorrect'
+      }
     }
 
     const jwt = this.jwt.sign({ id: user.id });
     res.cookie('token', jwt, { httpOnly: true });
-    return user;
+    return {
+      ok: true,
+      data: user
+    };
   }
 
   @Query(returns => AdminType)
@@ -49,7 +59,7 @@ whoAmI(@GqlUser() user: AdminType) {
 
   @Mutation(() => AdminType)
   async signup(
-    @Args('signUpInput') adminInput: AdminInput,
+    @Args('input') adminInput: AdminInput,
     @GqlRes() res: Response,
   ) {
     const emailExists = await this.admin.findOne(

@@ -55,8 +55,8 @@ type Mutation {
   createAdmin(input: AdminInput!): AdminType!
   updateAdmin(input: AdminInput!): AdminType!
   deleteAdmin(id: String!): String!
-  login(input: LoginInput!): AdminType!
-  signup(signUpInput: AdminInput!): AdminType!
+  login(input: LoginInput!): ResponseType!
+  signup(input: AdminInput!): AdminType!
   createCarousel(input: CarouselInput!): CarouselType!
   addCarouselPhoto(id: String!, file: Upload!): Boolean!
   deleteCarousel(id: String!): Boolean!
@@ -73,6 +73,12 @@ type Query {
   getOneCarousel(id: String!): CarouselType!
   getAllSettings: [SiteType!]!
   getCommission: [CommissionType!]!
+}
+
+type ResponseType {
+  ok: Boolean
+  error: String
+  data: AdminType
 }
 
 input SiteInput {
