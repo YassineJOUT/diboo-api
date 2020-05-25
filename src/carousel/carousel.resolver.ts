@@ -27,16 +27,16 @@ export class CarouselResolver {
   @Mutation(() => Boolean)
   @UseGuards(GqlAuthGuard)
   async addCarouselPhoto(
-    @Args({ name: 'file', type: () => GraphQLUpload })
-    { createReadStream, filename }: Upload,
-    @Args({ name: 'id', type: () => String }) id: string,
+    @Args('input') input: CarouselInput,
   ): Promise<boolean> {
-    const car = await this.carouselService.findOneById(id);
-    
+    const car = await this.carouselService.findOneById(input.id);
+    const carUpdated = await this.carouselService.update(input);
+    console.log(input.photo);
+    const { createReadStream, filename } = await input.photo;
     if (!car) throw Error('Carousel not found');
     return new Promise(async (resolve, reject) =>
       createReadStream()
-        .pipe(createWriteStream(__dirname + `/../../images/${id}.${filename.substr(filename.lastIndexOf('.') + 1)}`))
+        .pipe(createWriteStream(__dirname + `/../../images/${input.id}.${filename.substr(filename.lastIndexOf('.') + 1)}`))
         .on('finish', () => resolve(true))
         .on('error', () => reject(false)),
     );

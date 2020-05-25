@@ -16,10 +16,11 @@ type AdminType {
 
 input CarouselInput {
   id: ID
-  title: String!
-  subtitle: String!
-  status: Boolean!
-  bannerLink: String!
+  title: String
+  subtitle: String
+  status: Boolean
+  bannerLink: String
+  photo: Upload!
 }
 
 type CarouselType {
@@ -58,7 +59,7 @@ type Mutation {
   login(input: LoginInput!): ResponseType!
   signup(input: AdminInput!): AdminType!
   createCarousel(input: CarouselInput!): CarouselType!
-  addCarouselPhoto(id: String!, file: Upload!): Boolean!
+  addCarouselPhoto(input: CarouselInput!): Boolean!
   deleteCarousel(id: String!): Boolean!
   createSiteSettings(input: SiteInput!): SiteType!
   updateSiteSettings(input: SiteInput!): SiteType!

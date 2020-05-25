@@ -51,7 +51,7 @@ export class AuthResolver {
     };
   }
 
-  @Query(returns => AdminType)
+@Query(returns => AdminType)
 @UseGuards(GqlAuthGuard)
 whoAmI(@GqlUser() user: AdminType) {
   return this.admin.findOneById(user.id);
