@@ -1,0 +1,386 @@
+type Role {
+    id: ID!,
+    roleName: String!
+}
+type Photo {
+    id: ID!,
+    path: String!,
+}
+type Admin {
+    id: ID!,
+    email: string!,
+    username: String!,
+    password: String!,
+    image: Photo!,
+    rememeberMe: String!,
+    role: Role!
+}
+
+type Carousel {
+    id: ID!.
+    image: Photo!,
+    title: String!,
+    subtitle: String!,
+    status: Boolean!,
+    bannerLink: String,
+    createdAt: Date,
+    CreatedBy: Admin!
+}
+
+type Commission {
+    id: ID!.
+    commission: Int!,
+}
+
+type Category {
+    id: ID!,
+    name: String!,
+    description: String!,
+    status: Boolean!,
+    createdAt: Date,
+    createdBy: Restaurant!,
+    photo: Photo!
+}
+
+type Contactus{
+    id: ID!,
+    name: String!,
+    email: String!,
+    order: Order!,
+    restaurant: Restaurant!,
+    comment: String,
+    createdAt: Date,
+    status: Boolean,
+}
+content {
+    id: ID!,
+    title: String!,
+    url: String!,
+    content: String!,
+    metaTagTitle: String!,
+    metaTagDescription: String!,
+    metaTagKeyword: String!,
+    status: Boolean,
+    createdAt: Date!,
+
+}
+coupon {
+    id: ID!,
+    coupon: String!,
+    couponPer: Number,
+    couponFix: Number,
+    couponValidFrom: Date,
+    couponValidTo: Date,
+    createdAt: Date,
+    createdBy: Restaurant!,
+}
+
+credit cards {
+    id: ID!,
+    customer: Customer!,
+    type: String!,
+    number: String!,
+    expireMonth: Int,
+    expireYear: Int,
+    cvv: String,
+    createdAt: Date,
+}
+
+type Cuisine {
+    id: ID!,
+    name: String!,
+    url: String!,
+    photo: Photo,
+    description: String!,
+    status: Boolean,
+}
+type City{
+    id: ID!,
+    city: String!,
+
+}
+type Address{
+    id: ID!,
+    streetName: String!,
+    streetNumber: Int!,
+    houseNumber: Int!,
+    zipCode: String!,
+    city: City,
+}
+type Cusotmer {
+    id: ID!,
+    name: String!,
+    lastName: String!,
+    address: Address!,
+    phone: String!,
+    email: String!,
+    password: String!,
+    lastConnected: Date,
+    createdAt: Date,
+    image: Photo!,
+    status: Boolean,
+    
+}
+
+type Faq {
+    id: ID!,
+    question: String!,
+    answer: String!,
+    status: Boolean!,
+    createdAt: Date,
+    langCode: String!,
+}
+type Invoice {
+    id: ID!,
+    restaurant: Restaurant,
+    order: Order,
+    total: Number,
+    vat: Number,
+    date: Date,
+    createdAt: Date,
+}
+type Language {
+    id: ID,
+    name: String,
+    code: String,
+    status: Boolean,
+    createdAt: Date,
+    photo: Photo,
+
+    }
+type Favourite{
+    id: ID,
+    restaurant: Restaurant,
+    customer: Customer,
+    createdAt: Date
+    }
+
+type Newsletter{
+    id: ID,
+    email: String,
+    type: Int,
+
+    }
+type OrderStatus{
+    id: ID,
+    status: String,
+}
+type Order {
+    restaurant: Restaurant,
+    customer: Customer,
+    deliveryAddress: Address,
+    instructions: String!,
+    price: Number,
+    tax: Number,
+    payment: Payment,
+    status: OrderStatus,
+    createdAt: Date,
+    proceedDate: Date,
+    finishedDate: Date,
+    }
+type Payment{
+    id: ID!,
+    restaurant: Restaurant,
+    order: Order,
+    customer: Cusotmer,
+    payMethod: PaymentMethod,
+    transactionId: String,
+    createdAt: Date,
+    amount: Number
+    }
+type PaymentMethod {
+    id: ID!,
+    method: String,
+    createdAt: Date,
+    }
+type Paypal{
+    id: ID!,
+    restaurant: Restaurant,
+    payEmail: String,
+    createdAt: String,
+    }
+type Delivery{
+    id: ID!,
+    by: Boolean,//0= admin, 1= self
+    hours: String,
+
+    monOpenTime: String,
+    monCloseTime: String,
+    
+    tueOpenTime: String,
+    tueCloseTime: String,
+
+    WedOpenTime: String,
+    WedCloseTime: String,
+
+    thuOpenTime: String,
+    thuCloseTime: String,
+
+    friOpenTime: String,
+    friCloseTime: String,
+
+    satOpenTime: String,
+    satCloseTime: String,
+
+    sunOpenTime: String,
+    sunCloseTime: String
+
+    deliveryEreas: String,
+    minOrderPrice: Number,
+
+    
+}
+type Restaurant{
+    id: ID!,
+    name: String,
+    url: String,
+    phone: String,
+    logo: Photo,
+    webiste: String,
+    fax: String,
+    address: Address,
+    contactName: String,
+    contactPhone: String,
+    contactEmail: String,
+    description: String,
+    dineIn, Boolean,
+    estimatedTime: String,
+    estimatedTime1: String,
+    estimatedTime2: String,
+    delivery: Delivery,
+    email: String,
+
+    password: String,
+    pickUp: Boolean,
+    bookTable: Boolean,
+
+    displayPhoto: Boolean,
+    displayVideo: Boolean,
+    displayBanner: Boolean,
+    photos: [Photo!]!,
+    bannerColor: String,
+
+    video: String,
+    map: String,
+
+    bankName: String,
+    accountNumber: String,
+    codeSwift: String,
+
+    savingAccount: Boolean,
+
+    featureStatus: Boolean,
+    footerStatus: Boolean,
+    status: Boolean,
+    deleted: Boolean,
+    createdAt: String,
+    tatitude: String,
+    longitude: String,
+
+    deliveryZones: [String],
+    
+
+
+    }
+type RestaurantPaymethod {
+    id: ID!,
+    restaurant: Restaurant,
+    payMethod: PaymentMethod,
+    createdAt: Date,
+    status: Boolean,
+
+    }
+type RestaurantImage{
+    id: ID!,
+    image: Photo,
+    restaurant: Restaurant,
+    createdAt: Date,
+    }
+type MenuType{
+    id: ID!,
+    type: String,
+}
+type Menu {
+    id: ID!,
+    restaurant: Restaurant,
+    name: String,
+    type: MenuType,
+    cuisine: Cuisine,
+    status: Boolean,
+    deleted: Boolean,
+    createdAt: Date,
+    }
+type RestaurantOffer{
+    id: ID!,
+    order: Order,
+    restaurant: Restaurant,
+    comment: String
+    }
+type RestaurantOrderComment {
+    id: ID!,
+
+    }
+type RestaurantReview {
+    id: ID!,
+    order: Order,
+    restaurant: Restaurant,
+    customer: Cusotmer,
+    rating: Number,
+    ratingDelivery: Number,
+    ratingProduct: Number,
+    comment: String,
+    status: Boolean,
+    createdAt: Date
+    }
+type RestaurantServingCuisine{
+    id: ID!,
+    restaurant: Restaurant,
+    cuisine: Cuisine,
+    status: Boolean
+    }
+type RestaurentSubscription {
+    id: ID!,
+    restaurant: Restaurant,
+    feedback: String,
+    status: Boolean,
+    createdAt: Date,
+    }
+type SiteFeedback{
+    id: ID!,
+
+    }
+type SiteSetting{
+    id: ID!,
+    adminName: String,
+    adminEmail: String,
+    supportEmail: String,
+    sitePhone: String,
+    siteName: String,
+    siteLogo: String,
+    siteFavIcon: String,
+    adminPage: String,
+    userPage: String,
+    userPage: String,
+    offlineStatus: Boolean,
+    offlineNote: String,
+    currencyImage: Photo,
+    currencySymbol: String,
+    siteAddress: Address,
+    headerText: String,
+    googleAnalyticCode: String,
+    siteMetaTagTitle: String,
+    siteMetaTagKeyword: String,
+    siteMetaTagDescription: String,
+    facebook: String,
+    twitter: String,
+    linkedin: String,
+    youtube: String,
+    instagram: String,
+
+    }
+type template {
+    id: ID!,
+    name: String,
+    template: String,
+    subject: String,
+    }

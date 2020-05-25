@@ -1,0 +1,138 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AdminInput {
+  id: ID
+  email: String!
+  password: String!
+}
+
+type AdminType {
+  id: ID
+  email: String
+  password: String
+}
+
+input CarouselInput {
+  id: ID
+  title: String
+  subtitle: String
+  status: Boolean
+  bannerLink: String
+  photo: Upload!
+}
+
+type CarouselType {
+  id: ID
+  title: String
+  subtitle: String
+  status: Boolean
+  bannerLink: String
+  createdAt: DateTime
+}
+
+input CommissionInput {
+  id: ID
+  commission: Float!
+}
+
+type CommissionType {
+  id: ID
+  commission: Float
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createAdmin(input: AdminInput!): AdminType!
+  updateAdmin(input: AdminInput!): AdminType!
+  deleteAdmin(id: String!): String!
+  login(input: LoginInput!): ResponseType!
+  signup(input: AdminInput!): AdminType!
+  createCarousel(input: CarouselInput!): CarouselType!
+  addCarouselPhoto(input: CarouselInput!): Boolean!
+  deleteCarousel(id: String!): Boolean!
+  createSiteSettings(input: SiteInput!): SiteType!
+  updateSiteSettings(input: SiteInput!): SiteType!
+  createCommission(input: CommissionInput!): CommissionType!
+  updateCommission(input: CommissionInput!): CommissionType!
+}
+
+type Query {
+  getOne(email: String!): AdminType!
+  getAll: [AdminType!]!
+  whoAmI: AdminType!
+  getOneCarousel(id: String!): CarouselType!
+  getAllSettings: [SiteType!]!
+  getCommission: [CommissionType!]!
+}
+
+type ResponseType {
+  ok: Boolean
+  error: String
+  data: AdminType
+}
+
+input SiteInput {
+  id: ID
+  adminName: String!
+  adminEmail: String!
+  supportEmail: String!
+  sitePhone: String!
+  siteName: String!
+  siteLogo: String!
+  siteFavIcon: String!
+  adminPage: String!
+  userPage: String!
+  offlineStatus: Boolean!
+  offlineNote: String!
+  currencySymbol: String!
+  headerText: String!
+  googleAnalyticCode: String!
+  siteMetaTagTitle: String!
+  siteMetaTagKeyword: String!
+  siteMetaTagDescription: String!
+  facebook: String!
+  twitter: String!
+  linkedin: String!
+  youtube: String!
+  instagram: String!
+}
+
+type SiteType {
+  id: ID
+  adminName: String
+  adminEmail: String
+  supportEmail: String
+  sitePhone: String
+  siteName: String
+  siteLogo: String
+  siteFavIcon: String
+  adminPage: String
+  userPage: String
+  offlineStatus: Boolean
+  offlineNote: String
+  currencySymbol: String
+  headerText: String
+  googleAnalyticCode: String
+  siteMetaTagTitle: String
+  siteMetaTagKeyword: String
+  siteMetaTagDescription: String
+  facebook: String
+  twitter: String
+  linkedin: String
+  youtube: String
+  instagram: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
