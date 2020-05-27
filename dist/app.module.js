@@ -10,21 +10,33 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const graphql_1 = require("@nestjs/graphql");
-const db_module_1 = require("./db/db.module");
-const user_module_1 = require("./users/user.module");
+const db_1 = require("./config/db");
+const admin_module_1 = require("./admin/admin.module");
+const auth_module_1 = require("./auth/auth.module");
+const carousel_module_1 = require("./carousel/carousel.module");
+const sitesetting_module_1 = require("./sitesetting/sitesetting.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [
+            admin_module_1.AdminModule,
             graphql_1.GraphQLModule.forRoot({
+                cors: false,
+                context: ({ req }) => ({ req }),
                 autoSchemaFile: 'schema.gql',
+                uploads: {
+                    maxFileSize: 10000000,
+                    maxFiles: 5,
+                }
             }),
-            db_module_1.DatabaseModule,
-            user_module_1.UserModule,
+            db_1.mongooseModule,
+            auth_module_1.AuthModule,
+            carousel_module_1.CarouselModule,
+            sitesetting_module_1.SitesettingModule
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService]
     })
 ], AppModule);
 exports.AppModule = AppModule;

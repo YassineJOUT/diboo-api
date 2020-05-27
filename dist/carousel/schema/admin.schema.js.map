@@ -1,0 +1,1 @@
+{"version":3,"file":"admin.schema.js","sourceRoot":"","sources":["../../../src/carousel/schema/admin.schema.ts"],"names":[],"mappings":";;AAAA,qCAAsC;AAGzB,QAAA,cAAc,GAAG,IAAI,QAAQ,CAAC,MAAM,CAAC;IAGhD,KAAK,EAAE,MAAO;IACd,QAAQ,EAAE,MAAO;IACjB,MAAM,EAAE,OAAQ;IAChB,UAAU,EAAE,MAAM;IAClB,SAAS,EAAE,IAAI;CAEhB,CAAC,CAAC"}
