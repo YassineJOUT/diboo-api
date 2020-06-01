@@ -20,8 +20,12 @@ export class CarouselService {
     return adminDocument.save();
   }
 
-  async findOneById(id: string) {
+  async findOneById(id: string): Promise<Carousel> {
     return this.carouselModel.findOne({ _id: id });
+  }
+
+  async findAll(): Promise<Carousel[]> {
+    return  this.carouselModel.find().exec();
   }
 
   async update(carousel: CarouselInput): Promise<Carousel> {
