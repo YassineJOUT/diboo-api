@@ -21,6 +21,7 @@ input CarouselInput {
   status: Boolean
   bannerLink: String
   image: Upload
+  imagePath: String
 }
 
 type CarouselResponseType {
@@ -36,6 +37,7 @@ type CarouselType {
   status: Boolean
   bannerLink: String
   createdAt: DateTime
+  imagePath: String
 }
 
 input CommissionInput {
@@ -77,7 +79,7 @@ type Query {
   getOne(email: String!): AdminType!
   getAll: [AdminType!]!
   whoAmI: AdminType!
-  getOneCarousel(id: String!): CarouselType!
+  getOneCarousel(id: String!): CarouselResponseType!
   getCarousels: CarouselResponseType!
   getAllSettings: [SiteType!]!
   getCommission: [CommissionType!]!

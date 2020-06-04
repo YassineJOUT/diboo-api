@@ -6,15 +6,26 @@ import { createWriteStream } from 'fs';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
 import { CarouselResponseType } from './type/carousel-resp.type';
-
+import * as moment from 'moment';
 @Resolver()
 export class CarouselResolver {
   constructor(private readonly carouselService: CarouselService) {}
 
-  @Query(() => CarouselType)
+  @Query(() => CarouselResponseType)
   @UseGuards(GqlAuthGuard)
   async getOneCarousel(@Args('id') id: string) {
-    return this.carouselService.findOneById(id);
+    try {
+      const res = await this.carouselService.findOneById(id);
+      return {
+        ok: true,
+        data: [res],
+      };
+    } catch (err) {
+      return {
+        ok: false,
+        error: 'Something went wrong while fetching',
+      };
+    }
   }
 
   @Query(() => CarouselResponseType)
@@ -41,23 +52,26 @@ export class CarouselResolver {
       if (input.image !== null) {
         
         const imagePromesse = await new Promise(async (resolve, reject) =>{
-        const { createReadStream, filename } = await input.image;
+          const { createReadStream, filename } = await input.image;
+          const imagename = `img-${moment().format("MM-DD-YYYY-h:mm:ss")}.${filename.substr(
+            filename.lastIndexOf('.') + 1,
+          )}`;
           return await createReadStream()
             .pipe(
               createWriteStream(
-                __dirname +
-                  `/../../images/${"testtest-test"}.${filename.substr(
-                    filename.lastIndexOf('.') + 1,
-                  )}`,
+                __dirname + "/../../images/"+  imagename
+                  ,
               ),
             )
-            .on('finish', () => resolve(true))
+            .on('finish', () => {
+              const {image, ...result} =  input;
+              this.carouselService.create({...result,imagePath: imagename })
+              return resolve(true)
+            })
             .on('error', () => reject(false))
         });
-        return {
-          ok: true,
-          
-        };
+
+        if(imagePromesse)  return { ok: true }; else  return { ok: false,  };
      
       }
     } catch (err) {
@@ -75,7 +89,6 @@ export class CarouselResolver {
   ): Promise<boolean> {
     const car = await this.carouselService.findOneById(input.id);
     const carUpdated = await this.carouselService.update(input);
-    console.log(input.image);
     const { createReadStream, filename } = await input.image;
     if (!car) throw Error('Carousel not found');
     return new Promise(async (resolve, reject) =>

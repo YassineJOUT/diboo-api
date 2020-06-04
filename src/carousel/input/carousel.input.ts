@@ -16,4 +16,6 @@ export class CarouselInput {
   readonly bannerLink?: string;
   @Field(() => GraphQLUpload, {nullable: true})
   readonly image?: Upload;
+  @Field({nullable: true})
+  readonly imagePath?: string;
 }

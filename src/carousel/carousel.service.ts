@@ -15,7 +15,6 @@ export class CarouselService {
     const adminDocument = new this.carouselModel({
       ...carousel,
       createdAt: new Date(),
-      image: '',
     });
     return adminDocument.save();
   }

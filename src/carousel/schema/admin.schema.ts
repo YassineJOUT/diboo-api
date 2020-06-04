@@ -6,6 +6,7 @@ export const CarouselSchema = new mongoose.Schema({
   //image: Photo!,
   title: String!,
   subtitle: String!,
+  imagePath: String!,
   status: Boolean!,
   bannerLink: String,
   createdAt: Date,
