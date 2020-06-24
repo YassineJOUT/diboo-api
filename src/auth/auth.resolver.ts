@@ -13,7 +13,6 @@ import { GqlAuthGuard } from './graphql-auth.guard';
 import { ResponseType } from 'src/shared/response/ResponseType';
 import moment = require('moment');
 
-
 @Resolver('Auth')
 export class AuthResolver {
   constructor(
@@ -22,49 +21,40 @@ export class AuthResolver {
   ) {}
 
   @Mutation(() => ResponseType)
-  async login(
-    @Args('input') input: LoginInput,
-    @GqlRes() res: Response,
-  ) {
-      
+  async login(@Args('input') input: LoginInput, @GqlRes() res: Response) {
     const user = await this.admin.findOne(input.email);
     if (!user) {
       return {
         ok: false,
-        error: 'Email or password incorrect'
-      }
+        error: 'Email or password incorrect',
+      };
     }
-    
+
     const valid = await bcryptjs.compare(input.password, user.password);
     if (!valid) {
       return {
         ok: false,
-        error: 'Email or password incorrect'
-      }
+        error: 'Email or password incorrect',
+      };
     }
 
     const jwt = this.jwt.sign({ id: user.id });
     res.cookie('token', jwt, { httpOnly: true });
     return {
       ok: true,
-      data: user
+      data: user,
     };
   }
 
-@Query(returns => AdminType)
-@UseGuards(GqlAuthGuard)
-whoAmI(@GqlUser() user: AdminType) {
-  return this.admin.findOneById(user.id);
-}
+  @Query(returns => AdminType)
+  @UseGuards(GqlAuthGuard)
+  whoAmI(@GqlUser() user: AdminType) {
+    return this.admin.findOneById(user.id);
+  }
 
   @Mutation(() => AdminType)
-  async signup(
-    @Args('input') adminInput: AdminInput,
-    @GqlRes() res: Response,
-  ) {
-    const emailExists = await this.admin.findOne(
-        adminInput.email
-    );
+  async signup(@Args('input') adminInput: AdminInput, @GqlRes() res: Response) {
+    const emailExists = await this.admin.findOne(adminInput.email);
     if (emailExists) {
       throw Error('Email is already in use');
     }
