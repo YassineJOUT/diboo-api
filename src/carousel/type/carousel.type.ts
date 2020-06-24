@@ -14,4 +14,6 @@ export class CarouselType {
   readonly bannerLink: string;
   @Field({ nullable: true })
   readonly createdAt: Date;
+  @Field({ nullable: true })
+  readonly imagePath: string;
 }

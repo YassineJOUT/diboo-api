@@ -20,7 +20,14 @@ input CarouselInput {
   subtitle: String
   status: Boolean
   bannerLink: String
-  photo: Upload!
+  image: Upload
+  imagePath: String
+}
+
+type CarouselResponseType {
+  ok: Boolean
+  error: String
+  data: [CarouselType!]
 }
 
 type CarouselType {
@@ -30,6 +37,7 @@ type CarouselType {
   status: Boolean
   bannerLink: String
   createdAt: DateTime
+  imagePath: String
 }
 
 input CommissionInput {
@@ -58,8 +66,8 @@ type Mutation {
   deleteAdmin(id: String!): String!
   login(input: LoginInput!): ResponseType!
   signup(input: AdminInput!): AdminType!
-  createCarousel(input: CarouselInput!): CarouselType!
-  addCarouselPhoto(input: CarouselInput!): Boolean!
+  createCarousel(input: CarouselInput!): CarouselResponseType!
+  addCarouselPhoto(input: CarouselInput!): CarouselResponseType!
   deleteCarousel(id: String!): Boolean!
   createSiteSettings(input: SiteInput!): SiteType!
   updateSiteSettings(input: SiteInput!): SiteType!
@@ -71,7 +79,8 @@ type Query {
   getOne(email: String!): AdminType!
   getAll: [AdminType!]!
   whoAmI: AdminType!
-  getOneCarousel(id: String!): CarouselType!
+  getOneCarousel(id: String!): CarouselResponseType!
+  getCarousels: CarouselResponseType!
   getAllSettings: [SiteType!]!
   getCommission: [CommissionType!]!
 }
