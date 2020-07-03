@@ -119,9 +119,11 @@ export class CarouselResolver {
     };
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => CarouselResponseType)
   @UseGuards(GqlAuthGuard)
   async deleteCarousel(@Args('id') id: String) {
-    return this.carouselService.remove(id);
+    return {
+      ok: await this.carouselService.remove(id)
+    }
   }
 }
