@@ -7,6 +7,7 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
 import { CarouselResponseType } from './type/carousel-resp.type';
 import * as moment from 'moment';
+import { ERROR_FETCHING, ERROR_INSERTING } from 'src/shared/Consts';
 @Resolver()
 export class CarouselResolver {
   constructor(private readonly carouselService: CarouselService) {}
@@ -23,7 +24,7 @@ export class CarouselResolver {
     } catch (err) {
       return {
         ok: false,
-        error: 'Something went wrong while fetching',
+        error: ERROR_FETCHING,
       };
     }
   }
@@ -40,7 +41,7 @@ export class CarouselResolver {
     } catch (err) {
       return {
         ok: false,
-        error: 'Something went wrong while fetching',
+        error: ERROR_FETCHING,
       };
     }
   }
@@ -72,7 +73,7 @@ export class CarouselResolver {
     } catch (err) {
       return {
         ok: false,
-        error: 'Something went wrong while inserting',
+        error: ERROR_INSERTING,
       };
     }
   }
