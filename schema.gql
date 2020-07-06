@@ -68,7 +68,7 @@ type Mutation {
   signup(input: AdminInput!): AdminType!
   createCarousel(input: CarouselInput!): CarouselResponseType!
   addCarouselPhoto(input: CarouselInput!): CarouselResponseType!
-  deleteCarousel(id: String!): Boolean!
+  deleteCarousel(id: String!): CarouselResponseType!
   createSiteSettings(input: SiteInput!): SiteType!
   updateSiteSettings(input: SiteInput!): SiteType!
   createCommission(input: CommissionInput!): CommissionType!
