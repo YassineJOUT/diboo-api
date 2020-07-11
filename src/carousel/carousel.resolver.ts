@@ -76,19 +76,23 @@ export class CarouselResolver {
             .on('error', () => reject(false));
         });
 
-        if (imagePromesse) return { ok: true };
-        else return { ok: false };
+        if (imagePromesse) return { ok: true, message: 'Carousel updated!' };
+        else return { ok: false, error: ERROR_INSERTING };
       } else {
         const { image, ...result } = input;
-        if (input.id){
+        if (input.id) {
           await this.carouselService.update({ ...result });
+          return {
+            ok: true,
+            message: 'Carousel updated!',
+          };
+        } else {
+          await this.carouselService.create({ ...result, imagePath: '' });
+          return {
+            ok: true,
+            message: 'Carousel Added!',
+          };
         }
-        else {
-          this.carouselService.create({ ...result, imagePath: '' });
-        }
-        return {
-          ok: true,
-        };
       }
     } catch (err) {
       return {
@@ -142,9 +146,33 @@ export class CarouselResolver {
 
   @Mutation(() => CarouselResponseType)
   @UseGuards(GqlAuthGuard)
-  async deleteCarousel(@Args('id') id: String) {
+  async editStatusCarousel(@Args('input') input: CarouselInput) {
+    const carUpdated = await this.carouselService.update({
+      id: input.id,
+      status: input.status,
+    });
+    if (!carUpdated)
+      return {
+        ok: false,
+        error: 'Could not update carousel status',
+      };
     return {
-      ok: await this.carouselService.remove(id),
+      ok: true,
+      message: 'Carousel status updated',
+    };
+  }
+  @Mutation(() => CarouselResponseType)
+  @UseGuards(GqlAuthGuard)
+  async deleteCarousel(@Args('id') id: String) {
+    const res = await this.carouselService.remove(id);
+    if (res)
+      return {
+        ok: res,
+        message: 'Carousel deleted!',
+      };
+    return {
+      ok: res,
+      error: 'Could not delete carouselå!',
     };
   }
 }

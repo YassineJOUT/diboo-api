@@ -7,6 +7,8 @@ export class CarouselResponseType{
   readonly ok: boolean;
   @Field({ nullable: true })
   readonly error: string;
+  @Field({ nullable: true })
+  readonly message: string;
   @Field(()=> [CarouselType],{ nullable: true })
   readonly data: [CarouselType];
 }
