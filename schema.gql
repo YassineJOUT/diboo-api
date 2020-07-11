@@ -15,7 +15,7 @@ type AdminType {
 }
 
 input CarouselInput {
-  id: ID
+  id: String
   title: String
   subtitle: String
   status: Boolean
