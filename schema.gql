@@ -46,6 +46,13 @@ input CommissionInput {
   commission: Float!
 }
 
+type CommissionResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: CommissionType
+}
+
 type CommissionType {
   id: ID
   commission: Float
@@ -74,7 +81,7 @@ type Mutation {
   createSiteSettings(input: SiteInput!): SiteType!
   updateSiteSettings(input: SiteInput!): SiteType!
   createCommission(input: CommissionInput!): CommissionType!
-  updateCommission(input: CommissionInput!): CommissionType!
+  updateCommission(input: CommissionInput!): CommissionResponseType!
 }
 
 type Query {
@@ -84,7 +91,7 @@ type Query {
   getOneCarousel(id: String!): CarouselResponseType!
   getCarousels: CarouselResponseType!
   getAllSettings: [SiteType!]!
-  getCommission: [CommissionType!]!
+  getCommission: CommissionResponseType!
 }
 
 type ResponseType {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Site } from './interface/site.interface';
+import { SiteSetting } from './interface/site.interface';
 import { SiteInput } from './input/site.input';
 import { Commission } from './interface/commission.interface';
 import { CommissionInput } from './input/commission.input';
@@ -9,16 +9,16 @@ import { CommissionInput } from './input/commission.input';
 @Injectable()
 export class SitesettingService {
     constructor(
-        @InjectModel('Site') private readonly siteModel: Model<Site>,
+        @InjectModel('SiteSetting') private readonly siteModel: Model<SiteSetting>,
         @InjectModel('Commission') private readonly comModel: Model<Commission>
       ) {}
     
-      async create(site: SiteInput): Promise<Site> {
+      async create(site: SiteInput): Promise<SiteSetting> {
         const adminDocument = new this.siteModel(site);
         return adminDocument.save();
       }
     
-      async update(site: SiteInput): Promise<Site> {
+      async update(site: SiteInput): Promise<SiteSetting> {
         await this.siteModel
           .updateOne(
             {
@@ -32,7 +32,7 @@ export class SitesettingService {
         return this.siteModel.findById(site.id).exec();
       }
     
-      async findAll(): Promise<Site[]> {
+      async findAll(): Promise<SiteSetting[]> {
         return this.siteModel.find().exec();
       }
 

@@ -7,7 +7,7 @@ import { CommissionSchema } from './schema/commission.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Site', schema: SiteSchema }]),
+    MongooseModule.forFeature([{ name: 'SiteSetting', schema: SiteSchema }]),
     MongooseModule.forFeature([{ name: 'Commission', schema: CommissionSchema }]),
   ],
 

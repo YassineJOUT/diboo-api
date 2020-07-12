@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface Site extends Document {
+export interface SiteSetting extends Document {
     readonly id: string,
     readonly adminName: String,
     readonly adminEmail: String,
