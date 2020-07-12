@@ -43,7 +43,7 @@ type CarouselType {
 
 input CommissionInput {
   id: ID
-  commission: Float!
+  commission: Float
 }
 
 type CommissionResponseType {

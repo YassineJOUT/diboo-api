@@ -55,6 +55,7 @@ export class SitesettingResolver {
   @Mutation(() => CommissionResponseType)
   @UseGuards(GqlAuthGuard)
   async updateCommission(@Args('input') input: CommissionInput) {
+    console.log(input)
     const res = await this.sitesettings.updateCommission(input);
     console.log(res);
     if (res)
