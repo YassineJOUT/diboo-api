@@ -63,6 +63,34 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input KitchenInput {
+  id: String
+  kitchenName: String
+  status: Boolean
+  popular: Boolean
+  description: String
+  image: Upload
+  imagePath: String
+}
+
+type KitchenResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: [KitchenType!]
+}
+
+type KitchenType {
+  id: ID
+  kitchenName: String
+  status: Boolean
+  popular: Boolean
+  description: String
+  image: Upload
+  imagePath: String
+  createdAt: DateTime
+}
+
 input LoginInput {
   email: String!
   password: String!
@@ -82,6 +110,8 @@ type Mutation {
   updateSiteSetting(input: SiteInput!): SiteSettingResponseType!
   createCommission(input: CommissionInput!): CommissionType!
   updateCommission(input: CommissionInput!): CommissionResponseType!
+  createOrUpdateKitchen(input: KitchenInput!): KitchenResponseType!
+  deleteKitchen(id: String!): KitchenResponseType!
 }
 
 type Query {
@@ -92,6 +122,8 @@ type Query {
   getCarousels: CarouselResponseType!
   getSetting: SiteSettingResponseType!
   getCommission: CommissionResponseType!
+  getOneKitchen(id: String!): KitchenResponseType!
+  getKitchens: KitchenResponseType!
 }
 
 type ResponseType {
