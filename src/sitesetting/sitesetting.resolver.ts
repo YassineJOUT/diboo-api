@@ -38,8 +38,11 @@ export class SitesettingResolver {
   @Mutation(() => SiteSettingResponseType)
   @UseGuards(GqlAuthGuard)
   async updateSiteSetting(@Args('input') input: SiteInput) {
-    const res = await this.sitesettings.update(input);
-    console.log(res);
+    let res = null;
+    if(input.id && input.id !== "")
+         res = await this.sitesettings.update(input);
+    else
+     res = await this.sitesettings.create(input);
     if (res)
       return {
         ok: true,
@@ -55,7 +58,6 @@ export class SitesettingResolver {
   @UseGuards(GqlAuthGuard)
   async getCommission() {
     const res = await this.sitesettings.getCommission();
-    console.log(res);
     if (res.length === 0)
       return {
         ok: false,
@@ -76,9 +78,11 @@ export class SitesettingResolver {
   @Mutation(() => CommissionResponseType)
   @UseGuards(GqlAuthGuard)
   async updateCommission(@Args('input') input: CommissionInput) {
-    console.log(input)
-    const res = await this.sitesettings.updateCommission(input);
-    console.log(res);
+    let res = null;
+    if(input.id && input.id !== "")
+         res = await this.sitesettings.updateCommission(input);
+    else
+     res = await this.sitesettings.createCommission(input);
     if (res)
       return {
         ok: true,
