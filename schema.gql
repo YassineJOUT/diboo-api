@@ -79,7 +79,7 @@ type Mutation {
   editStatusCarousel(input: CarouselInput!): CarouselResponseType!
   deleteCarousel(id: String!): CarouselResponseType!
   createSiteSettings(input: SiteInput!): SiteType!
-  updateSiteSettings(input: SiteInput!): SiteType!
+  updateSiteSetting(input: SiteInput!): SiteSettingResponseType!
   createCommission(input: CommissionInput!): CommissionType!
   updateCommission(input: CommissionInput!): CommissionResponseType!
 }
@@ -90,7 +90,7 @@ type Query {
   whoAmI: AdminType!
   getOneCarousel(id: String!): CarouselResponseType!
   getCarousels: CarouselResponseType!
-  getAllSettings: [SiteType!]!
+  getSetting: SiteSettingResponseType!
   getCommission: CommissionResponseType!
 }
 
@@ -102,35 +102,10 @@ type ResponseType {
 
 input SiteInput {
   id: ID
-  adminName: String!
-  adminEmail: String!
-  supportEmail: String!
-  sitePhone: String!
-  siteName: String!
-  siteLogo: String!
-  siteFavIcon: String!
-  adminPage: String!
-  userPage: String!
-  offlineStatus: Boolean!
-  offlineNote: String!
-  currencySymbol: String!
-  headerText: String!
-  googleAnalyticCode: String!
-  siteMetaTagTitle: String!
-  siteMetaTagKeyword: String!
-  siteMetaTagDescription: String!
-  facebook: String!
-  twitter: String!
-  linkedin: String!
-  youtube: String!
-  instagram: String!
-}
-
-type SiteType {
-  id: ID
   adminName: String
   adminEmail: String
   supportEmail: String
+  invoiceEmail: String
   sitePhone: String
   siteName: String
   siteLogo: String
@@ -150,6 +125,50 @@ type SiteType {
   linkedin: String
   youtube: String
   instagram: String
+  tax: Float
+  address: String
+  city: String
+  country: String
+  postCode: String
+}
+
+type SiteSettingResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: SiteType
+}
+
+type SiteType {
+  id: ID
+  adminName: String
+  adminEmail: String
+  supportEmail: String
+  invoiceEmail: String
+  sitePhone: String
+  siteName: String
+  siteLogo: String
+  siteFavIcon: String
+  adminPage: String
+  userPage: String
+  offlineStatus: Boolean
+  offlineNote: String
+  currencySymbol: String
+  headerText: String
+  googleAnalyticCode: String
+  siteMetaTagTitle: String
+  siteMetaTagKeyword: String
+  siteMetaTagDescription: String
+  facebook: String
+  twitter: String
+  linkedin: String
+  youtube: String
+  instagram: String
+  tax: Float
+  address: String
+  city: String
+  country: String
+  postCode: String
 }
 
 """The `Upload` scalar type represents a file upload."""

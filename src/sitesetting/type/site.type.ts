@@ -12,6 +12,8 @@ export class SiteType {
   @Field({ nullable: true })
   readonly supportEmail: string;
   @Field({ nullable: true })
+  readonly invoiceEmail: string;
+  @Field({ nullable: true })
   readonly sitePhone: string;
   @Field({ nullable: true })
   readonly siteName: string;
@@ -51,5 +53,14 @@ export class SiteType {
   readonly youtube: string;
   @Field({ nullable: true })
   readonly instagram: string;
-  
+  @Field({ nullable: true })
+  readonly tax: number;
+  @Field({ nullable: true })
+  readonly address: string;
+  @Field({ nullable: true })
+  readonly city: string;
+  @Field({ nullable: true })
+  readonly country: string;
+  @Field({ nullable: true })
+  readonly postCode: string;
 }

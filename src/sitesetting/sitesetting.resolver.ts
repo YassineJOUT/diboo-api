@@ -7,15 +7,26 @@ import { CommissionType } from './type/commission.type';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
 import { CommissionResponseType } from './type/commission-resp.type';
+import { SiteSettingResponseType } from './type/stitesetting-resp.type';
 
 @Resolver('Sitesetting')
 export class SitesettingResolver {
   constructor(private readonly sitesettings: SitesettingService) {}
 
-  @Query(() => [SiteType])
+  @Query(() => SiteSettingResponseType)
   @UseGuards(GqlAuthGuard)
-  async getAllSettings() {
-    return this.sitesettings.findAll();
+  async getSetting() {
+    const res = await this.sitesettings.getSetting();
+   // console.log(res);
+    if (res.length === 0)
+      return {
+        ok: false,
+        error: 'no commission found',
+      };
+    return {
+      ok: true,
+      data: res[0],
+    };
   }
 
   @Mutation(() => SiteType)
@@ -24,10 +35,20 @@ export class SitesettingResolver {
     return this.sitesettings.create(input);
   }
 
-  @Mutation(() => SiteType)
+  @Mutation(() => SiteSettingResponseType)
   @UseGuards(GqlAuthGuard)
-  async updateSiteSettings(@Args('input') input: SiteInput) {
-    return this.sitesettings.update(input);
+  async updateSiteSetting(@Args('input') input: SiteInput) {
+    const res = await this.sitesettings.update(input);
+    console.log(res);
+    if (res)
+      return {
+        ok: true,
+        message: 'Site settings Updated!',
+      };
+      return {
+        ok: false,
+        error: 'Could not update site setting',
+      };
   }
 
   @Query(() => CommissionResponseType)

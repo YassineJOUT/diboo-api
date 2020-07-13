@@ -4,50 +4,62 @@ import { Field, ID, InputType } from '@nestjs/graphql';
 export class SiteInput {
   @Field(() => ID, { nullable: true })
   readonly id?: string;
-  @Field()
+  @Field({ nullable: true })
   readonly adminName: string;
-  @Field()
+  @Field({ nullable: true })
   readonly adminEmail: string;
-  @Field()
+  @Field({ nullable: true })
   readonly supportEmail: string;
-  @Field()
+  @Field({ nullable: true })
+  readonly invoiceEmail: string;
+  @Field({ nullable: true })
   readonly sitePhone: string;
-  @Field()
+  @Field({ nullable: true })
   readonly siteName: string;
-  @Field()
+  @Field({ nullable: true })
   readonly siteLogo: string;
-  @Field()
+  @Field({ nullable: true })
   readonly siteFavIcon: string;
-  @Field()
+  @Field({ nullable: true })
   readonly adminPage: string;
-  @Field()
+  @Field({ nullable: true })
   readonly userPage: string;
-  @Field()
+  @Field({ nullable: true })
   readonly offlineStatus: boolean;
-  @Field()
+  @Field({ nullable: true })
   readonly offlineNote: string;
-  @Field()
+  @Field({ nullable: true })
  // readonly //currencyImage: Photo,
   readonly currencySymbol: string;
-  @Field()
+  @Field({ nullable: true })
  // readonly //siteAddress: Address,
   readonly headerText: string;
-  @Field()
+  @Field({ nullable: true })
   readonly googleAnalyticCode: string;
-  @Field()
+  @Field({ nullable: true })
   readonly siteMetaTagTitle: string;
-  @Field()
+  @Field({ nullable: true })
   readonly siteMetaTagKeyword: string;
-  @Field()
+  @Field({ nullable: true })
   readonly siteMetaTagDescription: string;
-  @Field()
+  @Field({ nullable: true })
   readonly facebook: string;
-  @Field()
+  @Field({ nullable: true })
   readonly twitter: string;
-  @Field()
+  @Field({ nullable: true })
   readonly linkedin: string;
-  @Field()
+  @Field({ nullable: true })
   readonly youtube: string;
-  @Field()
+  @Field({ nullable: true })
   readonly instagram: string;
+  @Field({ nullable: true })
+  readonly tax: number;
+  @Field({ nullable: true })
+  readonly address: string;
+  @Field({ nullable: true })
+  readonly city: string;
+  @Field({ nullable: true })
+  readonly country: string;
+  @Field({ nullable: true })
+  readonly postCode: string;
 }
