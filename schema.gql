@@ -41,6 +41,33 @@ type CarouselType {
   imagePath: String
 }
 
+input CategoryInput {
+  id: String
+  categoryName: String
+  status: Boolean
+  popular: Boolean
+  description: String
+  image: Upload
+  imagePath: String
+}
+
+type CategoryResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: [CategoryType!]
+}
+
+type CategoryType {
+  id: ID
+  categoryName: String
+  status: Boolean
+  description: String
+  image: Upload
+  imagePath: String
+  createdAt: DateTime
+}
+
 input CommissionInput {
   id: ID
   commission: Float
@@ -112,6 +139,8 @@ type Mutation {
   updateCommission(input: CommissionInput!): CommissionResponseType!
   createOrUpdateKitchen(input: KitchenInput!): KitchenResponseType!
   deleteKitchen(id: String!): KitchenResponseType!
+  createOrUpdateCategory(input: CategoryInput!): CategoryResponseType!
+  deleteCategory(id: String!): CategoryResponseType!
 }
 
 type Query {
@@ -124,6 +153,8 @@ type Query {
   getCommission: CommissionResponseType!
   getOneKitchen(id: String!): KitchenResponseType!
   getKitchens: KitchenResponseType!
+  getOneCategory(id: String!): CategoryResponseType!
+  getCategories: CategoryResponseType!
 }
 
 type ResponseType {

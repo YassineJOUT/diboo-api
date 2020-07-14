@@ -1,11 +1,10 @@
 import { Document } from 'mongoose';
 
-export interface Kitchen extends Document {
+export interface Category extends Document {
   readonly id: string;
-  readonly kitchenName: string;
+  readonly categoryName: string;
   readonly description: string;
-  readonly status: boolean;
-  readonly popular: boolean;
   readonly imagePath: string;
+  readonly status: boolean;
   readonly createdAt: Date;
 }
