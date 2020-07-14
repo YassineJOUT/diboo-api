@@ -48,7 +48,6 @@ export class MenuResolver {
   @Mutation(() => KitchenResponseType)
   @UseGuards(GqlAuthGuard)
   async createOrUpdateKitchen(@Args('input') input: KitchenInput) {
-    console.log(input)
     try {
       if (input.image) {
         const imagePromesse = await new Promise(async (resolve, reject) => {

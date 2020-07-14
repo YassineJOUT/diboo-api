@@ -102,7 +102,7 @@ type Mutation {
   deleteAdmin(id: String!): String!
   login(input: LoginInput!): ResponseType!
   signup(input: AdminInput!): AdminType!
-  createCarousel(input: CarouselInput!): CarouselResponseType!
+  createOrEditCarousel(input: CarouselInput!): CarouselResponseType!
   addCarouselPhoto(input: CarouselInput!): CarouselResponseType!
   editStatusCarousel(input: CarouselInput!): CarouselResponseType!
   deleteCarousel(id: String!): CarouselResponseType!
