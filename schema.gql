@@ -73,6 +73,11 @@ type Mutation {
   updateSiteSettings(input: SiteInput!): SiteType!
   createCommission(input: CommissionInput!): CommissionType!
   updateCommission(input: CommissionInput!): CommissionType!
+  createRestaurant(input: RestaurantInput!): RestaurantResponseType!
+  addRestaurantPhoto(input: RestaurantInput!): RestaurantResponseType!
+  deleteRestaurant(id: String!): Boolean!
+  updateRestaurant(input: RestaurantInput!): RestaurantResponseType!
+  updateRestaurantStatus(status: Boolean!, id: String!): RestaurantResponseType!
 }
 
 type Query {
@@ -83,12 +88,60 @@ type Query {
   getCarousels: CarouselResponseType!
   getAllSettings: [SiteType!]!
   getCommission: [CommissionType!]!
+  getOneRestaurant(id: String!): RestaurantResponseType!
+  getRestaurants: RestaurantResponseType!
 }
 
 type ResponseType {
   ok: Boolean
   error: String
   data: AdminType
+}
+
+input RestaurantInput {
+  id: ID
+  name: String!
+  website: String!
+  phone: String!
+  postCode: String!
+  email: String!
+  address: String!
+  city: String!
+  estimatedTime: String!
+  about: String!
+  delivery: Boolean!
+  pickUp: Boolean!
+  dineIn: Boolean!
+  commission: Float!
+  image: Upload
+  imagePath: String
+  status: Boolean
+}
+
+type RestaurantResponseType {
+  ok: Boolean
+  error: String
+  data: [RestaurantType!]
+}
+
+type RestaurantType {
+  id: ID
+  name: String!
+  website: String!
+  phone: String!
+  postCode: String!
+  email: String!
+  address: String!
+  city: String!
+  estimatedTime: String!
+  about: String!
+  delivery: Boolean!
+  pickUp: Boolean!
+  dineIn: Boolean!
+  commission: String!
+  image: Upload
+  imagePath: String
+  status: Boolean
 }
 
 input SiteInput {
