@@ -66,6 +66,7 @@ type CategoryType {
   image: Upload
   imagePath: String
   createdAt: DateTime
+  items: [ItemType!]
 }
 
 input CommissionInput {
@@ -89,6 +90,39 @@ type CommissionType {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+input ItemInput {
+  id: String
+  itemName: String
+  status: Boolean
+  instruction: Boolean
+  popular: Boolean
+  description: String
+  price: Float
+  image: Upload
+  imagePath: String
+  category: ID
+}
+
+type ItemResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: [ItemType!]
+}
+
+type ItemType {
+  id: ID
+  itemName: String
+  status: Boolean
+  instruction: Boolean
+  popular: Boolean
+  description: String
+  price: Float
+  imagePath: String
+  createdAt: DateTime
+  category: String
+}
 
 input KitchenInput {
   id: String
@@ -141,6 +175,8 @@ type Mutation {
   deleteKitchen(id: String!): KitchenResponseType!
   createOrUpdateCategory(input: CategoryInput!): CategoryResponseType!
   deleteCategory(id: String!): CategoryResponseType!
+  createOrUpdateItem(input: ItemInput!): ItemResponseType!
+  deleteItem(id: String!): ItemResponseType!
 }
 
 type Query {
@@ -155,6 +191,8 @@ type Query {
   getKitchens: KitchenResponseType!
   getOneCategory(id: String!): CategoryResponseType!
   getCategories: CategoryResponseType!
+  getOneItem(id: String!): ItemResponseType!
+  getItems: ItemResponseType!
 }
 
 type ResponseType {

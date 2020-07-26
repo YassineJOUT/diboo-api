@@ -1,7 +1,7 @@
-import * as mongoose from 'mongoose';
+import { schemaDefinitionNotAloneMessage } from 'graphql/validation/rules/LoneSchemaDefinition';
+import { Schema } from 'mongoose';
 
-export const CategorySchema = new mongoose.Schema({
-  title: String,
+export const CategorySchema = new Schema({
   categoryName: {
     type: String,
     default: '',
@@ -18,5 +18,11 @@ export const CategorySchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: new Date(),
-  }
+  },
+  items: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Item',
+    },
+  ],
 });

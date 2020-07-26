@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+import { Item } from './Item.interface';
 
 export interface Category extends Document {
   readonly id: string;
@@ -7,4 +8,5 @@ export interface Category extends Document {
   readonly imagePath: string;
   readonly status: boolean;
   readonly createdAt: Date;
+  readonly items: [string];
 }

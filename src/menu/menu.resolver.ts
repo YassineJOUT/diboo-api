@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import { createWriteStream } from 'fs';
 import { CategoryResponseType } from './types/category-resp.type';
 import { CategoryInput } from './inputs/Category.input';
+import { ItemResponseType } from './types/item-resp.typ';
+import { ItemInput } from './inputs/Item.input';
 
 @Resolver('Menu')
 export class MenuResolver {
@@ -154,7 +156,6 @@ export class MenuResolver {
   @Mutation(() => CategoryResponseType)
   @UseGuards(GqlAuthGuard)
   async createOrUpdateCategory(@Args('input') input: CategoryInput) {
-      console.log(input)
     try {
       if (input.image) {
         const imagePromesse = await new Promise(async (resolve, reject) => {
@@ -218,6 +219,110 @@ export class MenuResolver {
     return {
       ok: res,
       error: 'Could not delete Category!',
+    };
+  }
+  // menu items
+  @Query(() => ItemResponseType)
+  @UseGuards(GqlAuthGuard)
+  async getOneItem(@Args('id') id: string) {
+    try {
+      const res = await this.menuService.findItemById(id);
+      return {
+        ok: true,
+        data: [res],
+      };
+    } catch (err) {
+      return {
+        ok: false,
+        error: ERROR_FETCHING,
+      };
+    }
+  }
+
+  @Query(() => ItemResponseType)
+  @UseGuards(GqlAuthGuard)
+  async getItems() {
+    try {
+      const res = this.menuService.findAllItems();
+      return {
+        ok: true,
+        data: res,
+      };
+    } catch (err) {
+      return {
+        ok: false,
+        error: ERROR_FETCHING,
+      };
+    }
+  }
+
+  @Mutation(() => ItemResponseType)
+  @UseGuards(GqlAuthGuard)
+  async createOrUpdateItem(@Args('input') input: ItemInput) {
+    console.log(input)
+    try {
+      if (input.image) {
+        const imagePromesse = await new Promise(async (resolve, reject) => {
+          const { createReadStream, filename } = await input.image;
+          const imagename = `img-${moment().format(
+            'MM-DD-YYYY-h:mm:ss',
+          )}.${filename.substr(filename.lastIndexOf('.') + 1)}`;
+          return await createReadStream()
+            .pipe(createWriteStream(__dirname + '/../../images/' + imagename))
+            .on('finish', async () => {
+              const { image, ...result } = input;
+              if (input.id)
+                await this.menuService.updateItem({
+                  ...result,
+                  imagePath: imagename,
+                });
+              else
+                this.menuService.createItem({
+                  ...result,
+                  imagePath: imagename,
+                });
+              return resolve(true);
+            })
+            .on('error', () => reject(false));
+        });
+
+        if (imagePromesse) return { ok: true, message: 'Item updated!' };
+        else return { ok: false, error: ERROR_INSERTING };
+      } else {
+        const { image, ...result } = input;
+        if (input.id) {
+          await this.menuService.updateItem({ ...result });
+          return {
+            ok: true,
+            message: 'Item updated!',
+          };
+        } else {
+          await this.menuService.createItem({ ...result, imagePath: '' });
+          return {
+            ok: true,
+            message: 'Item Added!',
+          };
+        }
+      }
+    } catch (err) {
+      return {
+        ok: false,
+        error: ERROR_INSERTING,
+      };
+    }
+  }
+  @Mutation(() => ItemResponseType)
+  @UseGuards(GqlAuthGuard)
+  async deleteItem(@Args('id') id: String) {
+    const res = await this.menuService.removeItem(id);
+    if (res)
+      return {
+        ok: res,
+        message: 'Item deleted!',
+      };
+    return {
+      ok: res,
+      error: 'Could not delete Item!',
     };
   }
 }

@@ -1,6 +1,7 @@
 import { Field, ObjectType, ID } from '@nestjs/graphql';
 import { Upload } from 'src/shared/upload';
 import { GraphQLUpload } from 'graphql-upload';
+import { ItemType } from './item.type';
 
 @ObjectType()
 export class CategoryType {
@@ -18,4 +19,6 @@ export class CategoryType {
   readonly imagePath?: string;
   @Field({nullable: true})
   readonly createdAt?: Date;
+  @Field(() => [ItemType],{nullable: true})
+  readonly items?: [ItemType];
 }
