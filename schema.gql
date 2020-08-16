@@ -41,9 +41,44 @@ type CarouselType {
   imagePath: String
 }
 
+input CategoryInput {
+  id: String
+  categoryName: String
+  status: Boolean
+  popular: Boolean
+  description: String
+  image: Upload
+  imagePath: String
+}
+
+type CategoryResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: [CategoryType!]
+}
+
+type CategoryType {
+  id: ID
+  categoryName: String
+  status: Boolean
+  description: String
+  image: Upload
+  imagePath: String
+  createdAt: DateTime
+  items: [ItemType!]
+}
+
 input CommissionInput {
   id: ID
-  commission: Float!
+  commission: Float
+}
+
+type CommissionResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: CommissionType
 }
 
 type CommissionType {
@@ -56,6 +91,67 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input ItemInput {
+  id: String
+  itemName: String
+  status: Boolean
+  instruction: Boolean
+  popular: Boolean
+  description: String
+  price: Float
+  image: Upload
+  imagePath: String
+  category: ID
+}
+
+type ItemResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: [ItemType!]
+}
+
+type ItemType {
+  id: ID
+  itemName: String
+  status: Boolean
+  instruction: Boolean
+  popular: Boolean
+  description: String
+  price: Float
+  imagePath: String
+  createdAt: DateTime
+  category: String
+}
+
+input KitchenInput {
+  id: String
+  kitchenName: String
+  status: Boolean
+  popular: Boolean
+  description: String
+  image: Upload
+  imagePath: String
+}
+
+type KitchenResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: [KitchenType!]
+}
+
+type KitchenType {
+  id: ID
+  kitchenName: String
+  status: Boolean
+  popular: Boolean
+  description: String
+  image: Upload
+  imagePath: String
+  createdAt: DateTime
+}
+
 input LoginInput {
   email: String!
   password: String!
@@ -67,19 +163,20 @@ type Mutation {
   deleteAdmin(id: String!): String!
   login(input: LoginInput!): ResponseType!
   signup(input: AdminInput!): AdminType!
-  createCarousel(input: CarouselInput!): CarouselResponseType!
+  createOrEditCarousel(input: CarouselInput!): CarouselResponseType!
   addCarouselPhoto(input: CarouselInput!): CarouselResponseType!
   editStatusCarousel(input: CarouselInput!): CarouselResponseType!
   deleteCarousel(id: String!): CarouselResponseType!
   createSiteSettings(input: SiteInput!): SiteType!
-  updateSiteSettings(input: SiteInput!): SiteType!
+  updateSiteSetting(input: SiteInput!): SiteSettingResponseType!
   createCommission(input: CommissionInput!): CommissionType!
-  updateCommission(input: CommissionInput!): CommissionType!
-  createRestaurant(input: RestaurantInput!): RestaurantResponseType!
-  addRestaurantPhoto(input: RestaurantInput!): RestaurantResponseType!
-  deleteRestaurant(id: String!): Boolean!
-  updateRestaurant(input: RestaurantInput!): RestaurantResponseType!
-  updateRestaurantStatus(status: Boolean!, id: String!): RestaurantResponseType!
+  updateCommission(input: CommissionInput!): CommissionResponseType!
+  createOrUpdateKitchen(input: KitchenInput!): KitchenResponseType!
+  deleteKitchen(id: String!): KitchenResponseType!
+  createOrUpdateCategory(input: CategoryInput!): CategoryResponseType!
+  deleteCategory(id: String!): CategoryResponseType!
+  createOrUpdateItem(input: ItemInput!): ItemResponseType!
+  deleteItem(id: String!): ItemResponseType!
 }
 
 type Query {
@@ -88,10 +185,14 @@ type Query {
   whoAmI: AdminType!
   getOneCarousel(id: String!): CarouselResponseType!
   getCarousels: CarouselResponseType!
-  getAllSettings: [SiteType!]!
-  getCommission: [CommissionType!]!
-  getOneRestaurant(id: String!): RestaurantResponseType!
-  getRestaurants: RestaurantResponseType!
+  getSetting: SiteSettingResponseType!
+  getCommission: CommissionResponseType!
+  getOneKitchen(id: String!): KitchenResponseType!
+  getKitchens: KitchenResponseType!
+  getOneCategory(id: String!): CategoryResponseType!
+  getCategories: CategoryResponseType!
+  getOneItem(id: String!): ItemResponseType!
+  getItems: ItemResponseType!
 }
 
 type ResponseType {
@@ -148,35 +249,10 @@ type RestaurantType {
 
 input SiteInput {
   id: ID
-  adminName: String!
-  adminEmail: String!
-  supportEmail: String!
-  sitePhone: String!
-  siteName: String!
-  siteLogo: String!
-  siteFavIcon: String!
-  adminPage: String!
-  userPage: String!
-  offlineStatus: Boolean!
-  offlineNote: String!
-  currencySymbol: String!
-  headerText: String!
-  googleAnalyticCode: String!
-  siteMetaTagTitle: String!
-  siteMetaTagKeyword: String!
-  siteMetaTagDescription: String!
-  facebook: String!
-  twitter: String!
-  linkedin: String!
-  youtube: String!
-  instagram: String!
-}
-
-type SiteType {
-  id: ID
   adminName: String
   adminEmail: String
   supportEmail: String
+  invoiceEmail: String
   sitePhone: String
   siteName: String
   siteLogo: String
@@ -196,6 +272,50 @@ type SiteType {
   linkedin: String
   youtube: String
   instagram: String
+  tax: Float
+  address: String
+  city: String
+  country: String
+  postCode: String
+}
+
+type SiteSettingResponseType {
+  ok: Boolean
+  error: String
+  message: String
+  data: SiteType
+}
+
+type SiteType {
+  id: ID
+  adminName: String
+  adminEmail: String
+  supportEmail: String
+  invoiceEmail: String
+  sitePhone: String
+  siteName: String
+  siteLogo: String
+  siteFavIcon: String
+  adminPage: String
+  userPage: String
+  offlineStatus: Boolean
+  offlineNote: String
+  currencySymbol: String
+  headerText: String
+  googleAnalyticCode: String
+  siteMetaTagTitle: String
+  siteMetaTagKeyword: String
+  siteMetaTagDescription: String
+  facebook: String
+  twitter: String
+  linkedin: String
+  youtube: String
+  instagram: String
+  tax: Float
+  address: String
+  city: String
+  country: String
+  postCode: String
 }
 
 """The `Upload` scalar type represents a file upload."""

@@ -47,9 +47,7 @@ export class CarouselResolver {
 
   @Mutation(() => CarouselResponseType)
   @UseGuards(GqlAuthGuard)
-  async createCarousel(@Args('input') input: CarouselInput) {
-    console.log('inpuyt');
-    console.log(input);
+  async createOrEditCarousel(@Args('input') input: CarouselInput) {
     try {
       if (input.image) {
         const imagePromesse = await new Promise(async (resolve, reject) => {
