@@ -1,4 +1,4 @@
-import { Field, ID, InputType } from '@nestjs/graphql';
+import { Field, ID, InputType, Float } from '@nestjs/graphql';
 import { Upload } from 'src/shared/upload';
 import { GraphQLUpload } from 'graphql-upload';
 
@@ -6,36 +6,36 @@ import { GraphQLUpload } from 'graphql-upload';
 export class RestaurantInput {
     @Field(() => ID, { nullable: true })
     readonly id?: string;
-    @Field()
+    @Field({nullable: true})
     readonly name: string;
-    @Field()
+    @Field({nullable: true})
     readonly website: string;
-    @Field()
+    @Field({nullable: true})
     readonly phone: string;
-    @Field()
+    @Field({nullable: true})
     readonly postCode: string;
-    @Field()
+    @Field({nullable: true})
     readonly email: string;
-    @Field()
+    @Field({nullable: true})
     readonly address: string;
-    @Field()
+    @Field({nullable: true})
     readonly city: string;
-    @Field()
+    @Field({nullable: true})
     readonly estimatedTime: string;
-    @Field()
+    @Field({nullable: true})
     readonly about: string;
-    @Field()
+    @Field({nullable: true})
     readonly delivery: boolean;
-    @Field()
+    @Field({nullable: true})
     readonly pickUp: boolean;
-    @Field()
+    @Field({nullable: true})
     readonly dineIn: boolean;
-    @Field()
+    @Field(() => Float,{nullable: true})
     readonly commission: number;
     @Field(() => GraphQLUpload, {nullable: true})
     readonly image?: Upload;
     @Field({nullable: true})
     readonly imagePath?: string;
     @Field({nullable: true})
-     status: boolean;
+    readonly status: boolean;
 }

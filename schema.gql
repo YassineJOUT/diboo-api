@@ -100,19 +100,19 @@ type ResponseType {
 
 input RestaurantInput {
   id: ID
-  name: String!
-  website: String!
-  phone: String!
-  postCode: String!
-  email: String!
-  address: String!
-  city: String!
-  estimatedTime: String!
-  about: String!
-  delivery: Boolean!
-  pickUp: Boolean!
-  dineIn: Boolean!
-  commission: Float!
+  name: String
+  website: String
+  phone: String
+  postCode: String
+  email: String
+  address: String
+  city: String
+  estimatedTime: String
+  about: String
+  delivery: Boolean
+  pickUp: Boolean
+  dineIn: Boolean
+  commission: Float
   image: Upload
   imagePath: String
   status: Boolean
