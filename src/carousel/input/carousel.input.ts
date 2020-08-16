@@ -4,8 +4,8 @@ import { GraphQLUpload } from 'graphql-upload';
 
 @InputType()
 export class CarouselInput {
-  @Field(() => ID, { nullable: true })
-   id?: string;
+  @Field( { nullable: true })
+  readonly id?: string;
   @Field({ nullable: true })
   readonly title?: string;
   @Field({ nullable: true })
