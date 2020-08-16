@@ -201,6 +201,52 @@ type ResponseType {
   data: AdminType
 }
 
+input RestaurantInput {
+  id: ID
+  name: String
+  website: String
+  phone: String
+  postCode: String
+  email: String
+  address: String
+  city: String
+  estimatedTime: String
+  about: String
+  delivery: Boolean
+  pickUp: Boolean
+  dineIn: Boolean
+  commission: Float
+  image: Upload
+  imagePath: String
+  status: Boolean
+}
+
+type RestaurantResponseType {
+  ok: Boolean
+  error: String
+  data: [RestaurantType!]
+}
+
+type RestaurantType {
+  id: ID
+  name: String!
+  website: String!
+  phone: String!
+  postCode: String!
+  email: String!
+  address: String!
+  city: String!
+  estimatedTime: String!
+  about: String!
+  delivery: Boolean!
+  pickUp: Boolean!
+  dineIn: Boolean!
+  commission: String!
+  image: Upload
+  imagePath: String
+  status: Boolean
+}
+
 input SiteInput {
   id: ID
   adminName: String
