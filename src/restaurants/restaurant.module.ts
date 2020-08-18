@@ -7,6 +7,5 @@ import { RestaurantSchema } from './schema/restaurant.schema';
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'Restaurant', schema: RestaurantSchema }])],
   providers: [RestaurantResolver, RestaurantService],
-  exports: [RestaurantService]
 })
 export class RestaurantModule {}

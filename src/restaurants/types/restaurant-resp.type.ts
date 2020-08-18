@@ -7,6 +7,8 @@ export class RestaurantResponseType{
   readonly ok: boolean;
   @Field({ nullable: true })
   readonly error: string;
+  @Field({ nullable: true })
+  readonly message: string;
   @Field(()=> [RestaurantType],{ nullable: true })
   readonly data: [RestaurantType];
 }

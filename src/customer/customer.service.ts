@@ -6,11 +6,11 @@ import { Customer } from './interface/customer.interface';
 @Injectable()
 export class CustomerService {
  constructor(
-        @InjectModel('Customer') private readonly restaurantModel: Model<Customer>,
+        @InjectModel('Customer') private readonly customerModel: Model<Customer>,
       ) {} 
 
   async findAll(): Promise<Customer[]> {
-    return  this.restaurantModel.find().exec();
+    return  this.customerModel.find().exec();
   }
 
 }

@@ -177,6 +177,11 @@ type Mutation {
   deleteCategory(id: String!): CategoryResponseType!
   createOrUpdateItem(input: ItemInput!): ItemResponseType!
   deleteItem(id: String!): ItemResponseType!
+  addOrEditRestaurant(input: RestaurantInput!): RestaurantResponseType!
+  addRestaurantPhoto(input: RestaurantInput!): RestaurantResponseType!
+  deleteRestaurant(id: String!): Boolean!
+  updateRestaurant(input: RestaurantInput!): RestaurantResponseType!
+  updateRestaurantStatus(status: Boolean!, id: String!): RestaurantResponseType!
 }
 
 type Query {
@@ -193,6 +198,8 @@ type Query {
   getCategories: CategoryResponseType!
   getOneItem(id: String!): ItemResponseType!
   getItems: ItemResponseType!
+  getOneRestaurant(id: String!): RestaurantResponseType!
+  getRestaurants: RestaurantResponseType!
 }
 
 type ResponseType {
@@ -224,6 +231,7 @@ input RestaurantInput {
 type RestaurantResponseType {
   ok: Boolean
   error: String
+  message: String
   data: [RestaurantType!]
 }
 

@@ -10,7 +10,7 @@ export class CustomerResolver {
 
   @Query(() => CustomerResponseType)
   @UseGuards(GqlAuthGuard)
-  async getRestaurants() {
+  async getCustomers() {
     try {
       const res = this.customerService.findAll();
       return {

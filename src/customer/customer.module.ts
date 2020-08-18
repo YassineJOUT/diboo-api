@@ -9,4 +9,4 @@ import { CustomerSchema } from './schema/customer.schema';
   providers: [CustomerResolver, CustomerService],
   exports: [CustomerService]
 })
-export class RestaurantModule {}
+export class CustomerModule {}

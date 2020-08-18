@@ -10,6 +10,7 @@ import { SitesettingModule } from './sitesetting/sitesetting.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MenuModule } from './menu/menu.module';
+import { RestaurantModule } from './restaurants/restaurant.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { MenuModule } from './menu/menu.module';
     AuthModule,
     CarouselModule,
     SitesettingModule,
-    MenuModule
+    MenuModule,
+    RestaurantModule
   ],
   controllers: [AppController],
   providers: [AppService]
