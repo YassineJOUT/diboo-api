@@ -178,9 +178,7 @@ type Mutation {
   createOrUpdateItem(input: ItemInput!): ItemResponseType!
   deleteItem(id: String!): ItemResponseType!
   addOrEditRestaurant(input: RestaurantInput!): RestaurantResponseType!
-  addRestaurantPhoto(input: RestaurantInput!): RestaurantResponseType!
-  deleteRestaurant(id: String!): Boolean!
-  updateRestaurant(input: RestaurantInput!): RestaurantResponseType!
+  deleteRestaurant(id: String!): RestaurantResponseType!
   updateRestaurantStatus(status: Boolean!, id: String!): RestaurantResponseType!
 }
 

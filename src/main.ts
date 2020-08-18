@@ -8,6 +8,6 @@ async function bootstrap() {
   const options = {credentials: true, origin: 'http://localhost:3000'};
   app.enableCors(options);
   app.use(cookieParser());
-  await app.listen(3005);
+  await app.listen(3006);
 }
 bootstrap();
