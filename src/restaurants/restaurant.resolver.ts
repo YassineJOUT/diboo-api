@@ -168,6 +168,7 @@ export class RestaurantResolver {
         let returnTest= this.restaurantService.updateStatus(id, status);
         if(returnTest) return {
           ok: true,
+          message: "Status Updated!"
         }
         else return {
           ok: false,
