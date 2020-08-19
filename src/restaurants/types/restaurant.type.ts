@@ -1,6 +1,7 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { GraphQLUpload } from 'graphql-upload';
 import { Upload } from 'src/shared/upload';
+import { CustomerType } from '../../customer/types/customer.type';
 
 @ObjectType()
 export class RestaurantType {
@@ -39,4 +40,6 @@ export class RestaurantType {
   readonly imagePath?: string;
   @Field({nullable: true})
    status?: boolean;
+  @Field(() => [CustomerType],{nullable: true})
+  readonly customers?: [CustomerType];
 }

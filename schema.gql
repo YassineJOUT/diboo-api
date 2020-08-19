@@ -50,6 +50,33 @@ type CommissionType {
   commission: Float
 }
 
+input CustomerInput {
+  id: ID
+  name: String!
+  phone: String!
+  email: String!
+  addedDate: DateTime!
+  status: Boolean
+  restaurant: ID
+}
+
+type CustomerResponseType {
+  ok: Boolean
+  error: String
+  data: [CustomerType!]
+}
+
+type CustomerType {
+  id: ID
+  name: String!
+  phone: String!
+  email: String!
+  addedDate: DateTime!
+  status: Boolean
+  restaurant: String
+  orders: [OrderType!]
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -78,6 +105,30 @@ type Mutation {
   deleteRestaurant(id: String!): Boolean!
   updateRestaurant(input: RestaurantInput!): RestaurantResponseType!
   updateRestaurantStatus(status: Boolean!, id: String!): RestaurantResponseType!
+  createCustomer(input: CustomerInput!): CustomerResponseType!
+  createOrder(input: OrderInput!): OrderResponseType!
+}
+
+input OrderInput {
+  id: ID
+  totalPrice: Float!
+  paymentMethod: String!
+  date: DateTime!
+  customer: ID
+}
+
+type OrderResponseType {
+  ok: Boolean
+  error: String
+  data: [OrderType!]
+}
+
+type OrderType {
+  id: ID
+  totalPrice: Float!
+  paymentMethod: String!
+  date: DateTime!
+  customer: String
 }
 
 type Query {
@@ -90,6 +141,9 @@ type Query {
   getCommission: [CommissionType!]!
   getOneRestaurant(id: String!): RestaurantResponseType!
   getRestaurants: RestaurantResponseType!
+  getCustomers: CustomerResponseType!
+  getOneCustomer(id: String!): CustomerResponseType!
+  getOrders: OrderResponseType!
 }
 
 type ResponseType {
@@ -142,6 +196,7 @@ type RestaurantType {
   image: Upload
   imagePath: String
   status: Boolean
+  customers: [CustomerType!]
 }
 
 input SiteInput {

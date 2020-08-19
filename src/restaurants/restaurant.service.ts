@@ -20,7 +20,9 @@ export class RestaurantService {
   }
 
   async findAll(): Promise<Restaurant[]> {
-    return  this.restaurantModel.find().exec();
+    return  this.restaurantModel.find()
+    .populate('customers')
+    .exec();
   }
 
   async remove(id: String):Promise<boolean> {

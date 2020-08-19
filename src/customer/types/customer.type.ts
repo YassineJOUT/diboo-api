@@ -1,6 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { GraphQLUpload } from 'graphql-upload';
-import { Upload } from 'src/shared/upload';
+import { OrderType } from '../../orders/types/order.type';
 
 @ObjectType()
 export class CustomerType {
@@ -13,5 +12,12 @@ export class CustomerType {
   readonly phone: string;
   @Field()
   readonly email: string;
- 
+  @Field()
+  readonly addedDate: Date;
+  @Field({nullable: true})
+  status?: boolean;
+  @Field({nullable: true})
+  readonly restaurant: string;
+  @Field(() => [OrderType],{nullable: true})
+  readonly orders?: [OrderType];
 }

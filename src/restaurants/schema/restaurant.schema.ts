@@ -1,7 +1,7 @@
-import * as  mongoose from "mongoose";
+//import * as  mongoose from "mongoose";
+import { Schema } from 'mongoose';
 
-
-export const RestaurantSchema = new mongoose.Schema({
+export const RestaurantSchema = new Schema({
      name: String,
      website: String,
      phone: String,
@@ -17,5 +17,10 @@ export const RestaurantSchema = new mongoose.Schema({
      commission: Number,
      imagePath: String!,
      status: Boolean!,
-
+     customers: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: 'Customer',
+          },
+        ],
 });

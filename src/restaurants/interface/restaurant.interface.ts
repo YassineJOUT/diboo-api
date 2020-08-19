@@ -17,4 +17,5 @@ export interface Restaurant extends Document {
     readonly commission: number;
     readonly imagePath: string;
     status: boolean;
+    readonly customers: [string];
 }
